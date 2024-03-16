@@ -23,8 +23,7 @@ Could create graph diagram (eg via mermaid).
 
 ## Factory (Creational)
 
-The factory pattern is leveraged when you use a method that creates a new 
-instance each time you call it. 
+The factory pattern is leveraged when you use a method that creates a new instance each time you call it. 
 
 Vs e.g. Singleton, where if you call this method multiple times, it 
 will point to the same instance.
@@ -69,9 +68,6 @@ else:
 ```
 
 Every time we call `requests.get('https://myurl.com')` we get a new Response instance.
-
-## Singleton (Creational)
-
 
 ## Builder (Creational)
 
@@ -121,6 +117,33 @@ print(result)
 ```
 
 Pandas allows you to incrementally build results but it does not use the traditional building pattern in the sense that calling a method doesn't change the state of the object, it simply returns the result as a new object. 
+
+## Singleton (Creational)
+
+### Python Example - Python: same logger instance accross modules
+
+```python
+# module1.py
+import logging
+
+logger = logging.getLogger('myapp_logger')
+
+def function1():
+    logger.info('Message from function1 in module1')
+```
+
+```python
+# module2.py
+import logging
+
+logger = logging.getLogger('myapp_logger')
+
+def function1():
+    logger.info('Message from function2 in module2')
+```
+
+You can retrieve the same logger instance accross modules. However, the logger class doesn't enforce the use of a singleton pattern as it gives you a different instance if you call `getLogger` with a different name. So it's not a singleton in the strict sense.
+
 
 ## Adapter (Structural)
 
