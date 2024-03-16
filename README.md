@@ -121,6 +121,41 @@ Python internally doesn't create a new instance when you use the same quoted str
 Traditionally flyweight refers to a pattern leveraging an object instance with a certain state shared accross other instances to save memory.
 In the above it's not enforced to use it as a part. But e.g. `li = ['hi', 'hello']; li2 = ['hoho', 'hi']` uses `'hi'` as a sub part. Here also the flyweight only carries a single attribute whereas the traditional example you would carry multiple attributes on the flyweight.
 
+## Strategy (Behavioural)
+
+The strategy pattern is about encapsulating or abstracting different strategies of execution and utilization of  attributes; each which may result in different outputs.
+
+These strategy abstractions are then to be uniformly 'plugged in' or selected from an interface as alternatives.
+
+
+### Example Python - logger.addHandler()
+
+```
+import logging
+logger = logging.getLogger('my_logger')
+logger.addHandler(logging.StreamHandler())
+logger.addHandler(logging.FileHandler('logfile.log'))
+```
+
+Different handlers (like StreamHandler, FileHandler, SocketHandler) represent different strategies for where and how log messages should be output.
+
+* `StreamHandler`
+    * Where: StreamHandler writes logging messages to a stream, which could be any object with a write() method. By default, it uses sys.stderr.
+    * How: It sends the log messages to the console (standard error or standard output, depending on configuration).
+* `FileHandler`
+    * Where: FileHandler writes logging messages to a file on the disk.
+    * How: It sends the log messages to a specified file. This is useful for persistent logging, where logs are stored for later analysis.
+
+### Example Python - Pandas: df.sort_values(kind=...)
+
+```
+import pandas as pd
+df = pd.DataFrame({'data': [3, 1, 4, 1]})
+df.sort_values(by='data', kind='mergesort')
+```
+
+The kind parameter lets you choose a different strategy for sorting (like quicksort, heapsort, mergesort). 
+
 ## Template method (Behavioural)
 
 The template method pattern leverages a class with a 'template method'
