@@ -1,25 +1,4 @@
-# Python - Java design patterns
-
-Potential alternate name: 
-
-Design patterns in third party libraries
-
-
-General distinction:
-Building using a pattern - In the creation of the 
-Leveraging existing code using pattern / leveraging a pattern - 
-
-
-## Approach
-
-This  
-
-
-What are some ways to group design patterns? (other than creational, behav..)
-By type of problem they solve? 
-Eg. caching and flyweight both for better performance (speed optim or memory opt)
-
-Could create graph diagram (eg via mermaid).
+# Design patterns in third party libs and more
 
 ## Factory (Creational)
 
