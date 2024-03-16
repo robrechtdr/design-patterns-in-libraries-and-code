@@ -17,7 +17,52 @@ This
 
 ## Factory (Creational)
 
-The factory pattern 
+The factory pattern is leveraged when you use a method that creates a new 
+instance each time you call it. 
+
+Vs e.g. Singleton, where if you call this method multiple times, it 
+will point to the same instance.
+
+
+### Python Example - Django: objects.filter() returning new QuerySet instance
+
+The `MyMode.objects.filter` method returns a new instance of a QuerySet each time you call it. 
+
+```
+from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=100)
+    publish_year = models.IntegerField()
+
+    def __str__(self):
+        return self.title
+
+# Somewhere in your view or another function
+# Retuns a QuerySet instance
+recent_books = Book.objects.filter(publish_year__gt=2010)
+for book in recent_books:
+    print(book.title, book.author)
+
+```
+
+### Python Example - Requests: requests.get() returning new Response instance
+
+```
+import requests
+
+response = requests.get('https://api.example.com/data')
+if response.status_code == 200:
+    data = response.json()
+    for item in data:
+        print(item)
+else:
+    print("Failed to retrieve data")
+
+```
+
+Every time we call `requests.get('https://myurl.com')` we get a new Response instance.
 
 
 
