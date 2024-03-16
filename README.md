@@ -15,6 +15,12 @@ Leveraging existing code using pattern / leveraging a pattern -
 This  
 
 
+What are some ways to group design patterns? (other than creational, behav..)
+By type of problem they solve? 
+Eg. caching and flyweight both for better performance (speed optim or memory opt)
+
+Could create graph diagram (eg via mermaid).
+
 ## Factory (Creational)
 
 The factory pattern is leveraged when you use a method that creates a new 
@@ -71,7 +77,6 @@ Every time we call `requests.get('https://myurl.com')` we get a new Response ins
 The Adapter pattern is when we leverage a class (usually) that provides a 
 uniform interface to access different implementations/interfaces with similar functionality.
 
-
 Often used in:
 * Uniform interface for db access bc many different db products (e.g. Postgresql, sqlite, ...) that have different interfaces and functionality. 
 * Uniform interface to read files from different file formats (e.g. csv, json,...)
@@ -95,7 +100,26 @@ Under the hood django will use the [`django.db.backends.postgresql.base.Database
 when accessing postgres that is uniform accross different relational database products.
 
 
+## Flyweight (Structural)
 
+### Python Example - Python: quoted strings
+
+```
+one = 'hi'
+two = 'hi'
+three = "hi"
+
+>>> id(one) == id(two)
+True
+>>> id(two) == id(three)
+True
+
+```
+
+Python internally doesn't create a new instance when you use the same quoted string in order to save memory.
+
+Traditionally flyweight refers to a pattern leveraging an object instance with a certain state shared accross other instances to save memory.
+In the above it's not enforced to use it as a part. But e.g. `li = ['hi', 'hello']; li2 = ['hoho', 'hi']` uses `'hi'` as a sub part. Here also the flyweight only carries a single attribute whereas the traditional example you would carry multiple attributes on the flyweight.
 
 ## Template method (Behavioural)
 
