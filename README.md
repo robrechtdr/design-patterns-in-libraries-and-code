@@ -1,4 +1,7 @@
-# Design patterns in third party libs and more
+# Design patterns in common libraries
+Collection of design patterns in how they occur in common libraries and more based upon patterns in the GoF book and sources like refactoring.guru.
+
+The point of this repo is to leverage pre-existing experience with third party repo's  for people with some exposure to common third party libraries. It's much faster to learn from code you've already seen with real context vs code from scratch that in it's simple example implementation can be hard to see the benefit/sense from or to remember.
 
 ## Factory (Creational)
 
