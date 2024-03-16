@@ -194,6 +194,63 @@ Python internally doesn't create a new instance when you use the same quoted str
 Traditionally flyweight refers to a pattern leveraging an object instance with a certain state shared accross other instances to save memory.
 In the above it's not enforced to use it as a part. But e.g. `li = ['hi', 'hello']; li2 = ['hoho', 'hi']` uses `'hi'` as a sub part. Here also the flyweight only carries a single attribute whereas the traditional example you would carry multiple attributes on the flyweight.
 
+## Decorator (Structural)
+
+The decorator pattern allows you to add functionality to an existing function or class without modifying it.
+
+### Python Example - Pytest: pytest.mark.skip decorator
+
+```python
+import pytest
+import sys
+
+@pytest.mark.skipif(sys.version_info < (3, 7), reason="requires python3.7 or higher")
+class TestClass:
+    def test_method_1(self):
+        # Test code here...
+        assert True
+
+    def test_method_2(self):
+        # Test code here...
+        assert True
+
+```
+
+Applied to a class.
+
+### Python Example - Python Retry: retry decorator
+
+```python
+@retry(
+retry_on=(ZeroDivisionError,),
+    max_retries=2,
+    backoff_factor=1,
+    supress_exception=True,
+    retry_logger=LOGGER
+)
+def my_division_handler(num: int, den: int):
+    return num / den
+
+```
+
+Applied to a function.
+
+## Proxy (Structural)
+
+### 
+
+```python
+# module1.py
+import logging
+
+logger = logging.getLogger('myapp_logger')
+
+def function1():
+    logger.info('Message from function1 in module1')
+```
+
+
+
 ## Observer (Behavioural)
 
 The Observer pattern allows tracking state changes in an object ('subject') from an 'observer object'.
