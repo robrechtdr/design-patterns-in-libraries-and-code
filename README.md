@@ -172,33 +172,29 @@ DATABASES = {
 Under the hood django will use the [`django.db.backends.postgresql.base.DatabaseWrapper`](https://github.com/django/django/blob/main/django/db/backends/postgresql/base.py#L107) which is an adapter class to provide an interface 
 when accessing postgres that is uniform accross different relational database products.
 
+## Composite (Structural)
 
-## Flyweight (Structural)
-
-### Python Example - Python: quoted strings
+### Python Example - BeautifulSoup: Tag instances
 
 ```python
-one = 'hi'
-two = 'hi'
-three = "hi"
+from bs4 import BeautifulSoup
 
->>> id(one) == id(two)
-True
->>> id(two) == id(three)
-True
+html_doc = "<div><p>Paragraph in a div.</p><p>Another paragraph in a div.</p></div>"
+soup = BeautifulSoup(html_doc, 'html.parser')
 
+div_tag = soup.div
+
+# To get first p tag 
+p_tag = div_tag.children[0]
 ```
 
-Python internally doesn't create a new instance when you use the same quoted string in order to save memory.
-
-Traditionally flyweight refers to a pattern leveraging an object instance with a certain state shared accross other instances to save memory.
-In the above it's not enforced to use it as a part. But e.g. `li = ['hi', 'hello']; li2 = ['hoho', 'hi']` uses `'hi'` as a sub part. Here also the flyweight only carries a single attribute whereas the traditional example you would carry multiple attributes on the flyweight.
+The implementation is such that you can treat each Tag object uniformly, whether it's a single element or a composite of several elements.
 
 ## Decorator (Structural)
 
 The decorator pattern allows you to add functionality to an existing function or class without modifying it.
 
-### Python Example - Pytest: pytest.mark.skip decorator
+### Python Example - Pytest: pytest.mark.skipif decorator
 
 ```python
 import pytest
@@ -235,20 +231,75 @@ def my_division_handler(num: int, den: int):
 
 Applied to a function.
 
-## Proxy (Structural)
+## Flyweight (Structural)
 
-### 
+### Python Example - Python: quoted strings
 
 ```python
-# module1.py
-import logging
+one = 'hi'
+two = 'hi'
+three = "hi"
 
-logger = logging.getLogger('myapp_logger')
+>>> id(one) == id(two)
+True
+>>> id(two) == id(three)
+True
 
-def function1():
-    logger.info('Message from function1 in module1')
 ```
 
+Python internally doesn't create a new instance when you use the same quoted string in order to save memory.
+
+Traditionally flyweight refers to a pattern leveraging an object instance with a certain state shared accross other instances to save memory.
+In the above it's not enforced to use it as a part. But e.g. `li = ['hi', 'hello']; li2 = ['hoho', 'hi']` uses `'hi'` as a sub part. Here also the flyweight only carries a single attribute whereas the traditional example you would carry multiple attributes on the flyweight.
+
+
+## Proxy (Structural)
+
+The Proxy pattern is a structural design pattern that provides a surrogate or placeholder for another object to control access to it. 
+
+### Python Example - Django: ForeignKey proxy instance
+
+```python
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
+# step1: When accessing 'author', the related Author object is fetched lazily.
+book = Book.objects.get(id=1)
+# Step 2: The related Author object is loaded here
+author = book.author  
+
+```
+
+Just after step 1, the ForeignKey field is represented by an instance of ForwardManyToOneDescriptor, a proxy. As soon as you actually access the attribute in step 2, then the Author instance is loaded.
+
+## Command (Behavioural)
+
+### Python Example - Celery: tasks
+
+```python
+from celery import Celery
+
+app = Celery('my_app', broker='pyamqp://guest@localhost//')
+
+@app.task
+def long_running_task():
+    # Long running task implementation
+    pass
+
+# Queue the task
+task = long_running_task.apply_async()
+
+# Later, if needed, cancel (revoke) the task
+app.control.revoke(task.id)
+
+```
+
+A task is an object that represents a request for an operation, a 'task to be executed'. `apply_async()` is the main command method for this 
+operation.
 
 
 ## Observer (Behavioural)
