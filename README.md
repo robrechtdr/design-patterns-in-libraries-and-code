@@ -392,9 +392,8 @@ def my_handler(sender, instance, created, **kwargs):
     # Code to run after saving an instance of MyModel
 ```
 
-The receiver (using decorator pattern here) allows you to mark a function as an observer that tracks changes in the MyModel 'subject'. E.g. you can access a MyModel instance
-via the `instance` parameter as soon as a MyModel instance
-is saved.
+The receiver (using decorator pattern here) allows you to mark a function as an observer that tracks changes in the MyModel 'subject'. The handler is triggered as soon as you save a MyModel instance and gives access to 
+the model instance (e.g. a particular user).
 
 ## Strategy (Behavioural)
 
