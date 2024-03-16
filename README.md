@@ -34,7 +34,7 @@ will point to the same instance.
 
 The `MyMode.objects.filter` method returns a new instance of a QuerySet each time you call it. 
 
-```
+```python
 from django.db import models
 
 class Book(models.Model):
@@ -55,7 +55,7 @@ for book in recent_books:
 
 ### Python Example - Requests: requests.get() returning new Response instance
 
-```
+```python
 import requests
 
 response = requests.get('https://api.example.com/data')
@@ -86,7 +86,7 @@ Often used in:
 
 ### Python Example - Django: Under the hood of django.db.backends.postgresql
 
-```
+```python
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -104,7 +104,7 @@ when accessing postgres that is uniform accross different relational database pr
 
 ### Python Example - Python: quoted strings
 
-```
+```python
 one = 'hi'
 two = 'hi'
 three = "hi"
@@ -121,6 +121,26 @@ Python internally doesn't create a new instance when you use the same quoted str
 Traditionally flyweight refers to a pattern leveraging an object instance with a certain state shared accross other instances to save memory.
 In the above it's not enforced to use it as a part. But e.g. `li = ['hi', 'hello']; li2 = ['hoho', 'hi']` uses `'hi'` as a sub part. Here also the flyweight only carries a single attribute whereas the traditional example you would carry multiple attributes on the flyweight.
 
+## Observer (Behavioural)
+
+The Observer pattern allows tracking state changes in an object ('subject') from an 'observer object'.
+
+### Python Example - Django: receiver in django signals
+
+```python
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from myapp.models import MyModel
+
+@receiver(post_save, sender=MyModel)
+def my_handler(sender, instance, created, **kwargs):
+    # Code to run after saving an instance of MyModel
+```
+
+The receiver (using decorator pattern here) allows you to mark a function as an observer that tracks changes in the MyModel 'subject'. E.g. you can access a MyModel instance
+via the `instance` parameter as soon as a MyModel instance
+is saved.
+
 ## Strategy (Behavioural)
 
 The strategy pattern is about encapsulating or abstracting different strategies of execution and utilization of  attributes; each which may result in different outputs.
@@ -130,7 +150,7 @@ These strategy abstractions are then to be uniformly 'plugged in' or selected fr
 
 ### Example Python - logger.addHandler()
 
-```
+```python
 import logging
 logger = logging.getLogger('my_logger')
 logger.addHandler(logging.StreamHandler())
@@ -148,7 +168,7 @@ Different handlers (like StreamHandler, FileHandler, SocketHandler) represent di
 
 ### Example Python - Pandas: df.sort_values(kind=...)
 
-```
+```python
 import pandas as pd
 df = pd.DataFrame({'data': [3, 1, 4, 1]})
 df.sort_values(by='data', kind='mergesort')
@@ -168,7 +188,7 @@ core setup mechanism from that parent class that we talk about utilizing this pa
 
 ## Python Example - Django: CBV 
 
-```
+```python
 from django.views.generic import TemplateView
 
 class MyView(TemplateView):
@@ -188,7 +208,7 @@ for customization (to pass on an additional variable to a Django served html tem
 
 ## Python Example - Pandas: Custom function with df.apply?
 
-```
+```python
 import pandas as pd
 
 df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
