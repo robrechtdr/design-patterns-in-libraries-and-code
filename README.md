@@ -70,7 +70,57 @@ else:
 
 Every time we call `requests.get('https://myurl.com')` we get a new Response instance.
 
+## Singleton (Creational)
 
+
+## Builder (Creational)
+
+### Python Example - Matplotlib: building Axes for plot
+
+```python
+import matplotlib.pyplot as plt
+
+# Creating a figure
+fig, ax = plt.subplots()
+
+# Incrementally building the plot
+ax.plot([1, 2, 3, 4], [1, 4, 2, 3], label='Line 1') # Adding a line plot
+ax.scatter([1, 2, 3, 4], [1, 4, 2, 3], color='red', label='Scatter Points') # Adding scatter plot
+ax.set_xlabel('X Axis')  # Setting X-axis label
+ax.set_ylabel('Y Axis')  # Setting Y-axis label
+ax.set_title('Simple Plot')  # Setting title of the plot
+ax.legend()  # Adding a legend
+
+# Display the plot
+plt.show()
+```
+
+Here we incrementally add to (or 'build') the `ax` instance (`Axes` object) which is bound to the `plt` instance, preparing it for calling the `plt.show()` method.
+
+
+### Python Example - Pandas: method chaining as kind of builder
+
+```python
+import pandas as pd
+
+# Sample data
+data = {'A': [1, 2, 3, 4],
+        'B': [5, 6, 7, 8],
+        'C': [9, 10, 11, 12]}
+
+df = pd.DataFrame(data)
+
+# Using method chaining to build up a series of transformations
+result = (df.assign(D=lambda x: x['A'] + x['B'])
+           .query('D > 5')
+           .drop(columns=['C'])
+           .rename(columns={'D': 'SumAB'})
+           .reset_index(drop=True))
+
+print(result)
+```
+
+Pandas allows you to incrementally build results but it does not use the traditional building pattern in the sense that calling a method doesn't change the state of the object, it simply returns the result as a new object. 
 
 ## Adapter (Structural)
 
