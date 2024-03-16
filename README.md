@@ -1,4 +1,4 @@
-# Design patterns in common libraries
+# Design patterns in common libraries and code
 Collection of design patterns in how they occur in common libraries and more based upon patterns in the GoF book and sources like refactoring.guru.
 
 The point of this repo is to leverage pre-existing experience with third party repo's  for people with some exposure to common third party libraries. It's much faster to learn from code you've already seen with real context vs code from scratch that in it's simple example implementation can be hard to see the benefit/sense from or to remember.
@@ -284,6 +284,61 @@ A task is an object that represents a request for an operation, a 'task to be ex
 operation.
 
 
+## Iterator (Behavioural)
+
+### Python Example - Python: custom DFS iterator
+
+```python
+# Object example to iterate over
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+## Code definition
+class DFSIterator:
+    def __init__(self, graph, start_node):
+        self.graph = graph
+        self.start_node = start_node
+        self.stack = []
+        self.visited = set()
+
+    def __iter__(self):
+        self.stack.append(self.start_node)
+        self.visited.add(self.start_node)
+        return self
+
+    def __next__(self):
+        if not self.stack:
+            raise StopIteration
+        
+        current_node = self.stack.pop()
+        for neighbor in reversed(self.graph[current_node]):
+            if neighbor not in self.visited:
+                self.stack.append(neighbor)
+                self.visited.add(neighbor)
+        
+        return current_node
+
+## Usage
+
+# Create an instance of the iterator
+starting_node = 'A
+graph_dfs = DFSIterator(graph, starting_node)
+
+# Iterate through the graph
+for node in graph_dfs:
+    print(node)
+
+```
+
+The iterator provides a simplified interface (`for node in graph_dfs`) for depth first search iteration over a graph. 
+
+
 ## Observer (Behavioural)
 
 The Observer pattern allows tracking state changes in an object ('subject') from an 'observer object'.
@@ -311,7 +366,7 @@ The strategy pattern is about encapsulating or abstracting different strategies 
 These strategy abstractions are then to be uniformly 'plugged in' or selected from an interface as alternatives.
 
 
-### Example Python - logger.addHandler()
+### Example Python - Python: logger.addHandler()
 
 ```python
 import logging
