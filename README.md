@@ -3,6 +3,43 @@ Collection of design patterns in how they occur in common libraries and more bas
 
 The point of this repo is to leverage pre-existing experience with third party repo's  for people with some exposure to common third party libraries. It's much faster to learn from code you've already seen with real context vs code from scratch that in it's simple example implementation can be hard to see the benefit/sense from or to remember.
 
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+- [Factory (Creational)](#factory-creational)
+   * [Python Example - Django: objects.filter() returning new QuerySet instance](#python-example---django-objectsfilter-returning-new-queryset-instance)
+   * [Python Example - Requests: requests.get() returning new Response instance](#python-example---requests-requestsget-returning-new-response-instance)
+- [Builder (Creational)](#builder-creational)
+   * [Python Example - Matplotlib: building Axes for plot](#python-example---matplotlib-building-axes-for-plot)
+   * [Python Example - Pandas: method chaining as kind of builder](#python-example---pandas-method-chaining-as-kind-of-builder)
+- [Singleton (Creational)](#singleton-creational)
+   * [Python Example - Python: same logger instance accross modules](#python-example---python-same-logger-instance-accross-modules)
+- [Adapter (Structural)](#adapter-structural)
+   * [Python Example - Django: Under the hood of django.db.backends.postgresql](#python-example---django-under-the-hood-of-djangodbbackendspostgresql)
+- [Composite (Structural)](#composite-structural)
+   * [Python Example - BeautifulSoup: Tag instances](#python-example---beautifulsoup-tag-instances)
+- [Decorator (Structural)](#decorator-structural)
+   * [Python Example - Pytest: pytest.mark.skipif decorator](#python-example---pytest-pytestmarkskipif-decorator)
+   * [Python Example - Python Retry: retry decorator](#python-example---python-retry-retry-decorator)
+- [Flyweight (Structural)](#flyweight-structural)
+   * [Python Example - Python: quoted strings](#python-example---python-quoted-strings)
+- [Proxy (Structural)](#proxy-structural)
+   * [Python Example - Django: ForeignKey proxy instance](#python-example---django-foreignkey-proxy-instance)
+- [Command (Behavioural)](#command-behavioural)
+   * [Python Example - Celery: tasks](#python-example---celery-tasks)
+- [Iterator (Behavioural)](#iterator-behavioural)
+   * [Python Example - Python: custom DFS iterator](#python-example---python-custom-dfs-iterator)
+- [Observer (Behavioural)](#observer-behavioural)
+   * [Python Example - Django: receiver in django signals](#python-example---django-receiver-in-django-signals)
+- [Strategy (Behavioural)](#strategy-behavioural)
+   * [Example Python - Python: logger.addHandler()](#example-python---python-loggeraddhandler)
+   * [Example Python - Pandas: df.sort_values(kind=...)](#example-python---pandas-dfsort_valueskind)
+- [Template method (Behavioural)](#template-method-behavioural)
+   * [Python Example - Django: CBV ](#python-example---django-cbv)
+   * [Python Example - Pandas: Custom function with df.apply?](#python-example---pandas-custom-function-with-dfapply)
+
+<!-- TOC end -->
+
+
 ## Factory (Creational)
 
 The factory pattern is leveraged when you use a method that creates a new instance each time you call it. 
@@ -404,7 +441,7 @@ So simply inheriting from a class with some methods is not sufficient to talk ab
 core setup mechanism from that parent class that we talk about utilizing this pattern.
 
 
-## Python Example - Django: CBV 
+### Python Example - Django: CBV 
 
 ```python
 from django.views.generic import TemplateView
@@ -424,7 +461,7 @@ class MyView(TemplateView):
 Inheriting MyView will also inherit the instantiation code of TemplateView (here the 'template method') which calls the `get_context_data`, here overwritten 
 for customization (to pass on an additional variable to a Django served html template).
 
-## Python Example - Pandas: Custom function with df.apply?
+### Python Example - Pandas: Custom function with df.apply?
 
 ```python
 import pandas as pd
