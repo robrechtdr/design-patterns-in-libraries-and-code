@@ -1,7 +1,7 @@
 # Design patterns in common libraries and code
 Collection of design patterns in how they occur in common libraries and more based upon patterns in the GoF book and sources like refactoring.guru.
 
-The point of this repo is to leverage pre-existing experience with third party repo's  for people with some exposure to common third party libraries. It's much faster to learn from code you've already seen with real context vs code from scratch that in it's simple example implementation can be hard to see the benefit/sense from or to remember.
+The point of this repo is to leverage pre-existing experience with third party repo's  for people with some exposure to common third party libraries. It's much faster to learn from code you've already seen with real context vs code from scratch that in its simple example implementation can be hard to see the benefit/sense from or to remember.
 
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
@@ -34,7 +34,7 @@ The point of this repo is to leverage pre-existing experience with third party r
    * [Example Python - Python: logger.addHandler()](#example-python---python-loggeraddhandler)
    * [Example Python - Pandas: df.sort_values(kind=...)](#example-python---pandas-dfsort_valueskind)
 - [Template method (Behavioural)](#template-method-behavioural)
-   * [Python Example - Django: CBV ](#python-example---django-cbv)
+   * [Python Example - Django: CBVs ](#python-example---django-cbvs)
    * [Python Example - Pandas: Custom function with df.apply?](#python-example---pandas-custom-function-with-dfapply)
 
 <!-- TOC end -->
@@ -440,7 +440,7 @@ So simply inheriting from a class with some methods is not sufficient to talk ab
 core setup mechanism from that parent class that we talk about utilizing this pattern.
 
 
-### Python Example - Django: CBV 
+### Python Example - Django: CBVs
 
 ```python
 from django.views.generic import TemplateView
