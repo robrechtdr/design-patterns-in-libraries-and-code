@@ -66,6 +66,37 @@ Every time we call `requests.get('https://myurl.com')` we get a new Response ins
 
 
 
+## Adapter (Structural)
+
+The Adapter pattern is when we leverage a class (usually) that provides a 
+uniform interface to access different implementations/interfaces with similar functionality.
+
+
+Often used in:
+* Uniform interface for db access bc many different db products (e.g. Postgresql, sqlite, ...) that have different interfaces and functionality. 
+* Uniform interface to read files from different file formats (e.g. csv, json,...)
+* Uniform interface to access different web services (e.g. REST, SOAP,...)
+* Uniform interface to access different APIs (e.g. Google, Facebook,...)
+* Uniform interface (e.g. [splinter lib](https://splinter.readthedocs.io/en/stable/)) in browser automation to access different browsers (e.g. Chrome, Firefox,...)
+
+### Python Example - Django: Under the hood of django.db.backends.postgresql
+
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'db_name',                      
+        #...
+    }
+}
+```
+
+Under the hood django will use the [`django.db.backends.postgresql.base.DatabaseWrapper`](https://github.com/django/django/blob/main/django/db/backends/postgresql/base.py#L107) which is an adapter class to provide an interface 
+when accessing postgres that is uniform accross different relational database products.
+
+
+
+
 ## Template method (Behavioural)
 
 The template method pattern leverages a class with a 'template method'
